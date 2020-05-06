@@ -35,6 +35,8 @@ int Sys_FileRead (int handle, void *dest, int count);
 int Sys_FileWrite (int handle, void *data, int count);
 int	Sys_FileTime (char *path);
 void Sys_mkdir (char *path);
+void Sys_FileSync (int handle);
+void Sys_File_gets (int handle, char *buf, int len);
 
 //
 // memory protection
