@@ -24,7 +24,6 @@ static byte *surfcache;
 static uint32_t clut_argb8888[256];
 
 /* Global allocation for the renderer */
-viddef_t vid;
 unsigned short d_8to16table[256];
 unsigned d_8to24table[256];
 
