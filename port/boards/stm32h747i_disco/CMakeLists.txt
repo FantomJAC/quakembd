@@ -1,0 +1,146 @@
+set(CUBE_HOME "$ENV{HOME}/STM32Cube/Repository/STM32Cube_FW_H7_V1.7.0")
+
+set(CUBE_DRIVER_SRCS
+	${CUBE_HOME}/Drivers/BSP/Components/is42s32800j/is42s32800j.c
+	${CUBE_HOME}/Drivers/BSP/Components/otm8009a/otm8009a_reg.c
+	${CUBE_HOME}/Drivers/BSP/Components/otm8009a/otm8009a.c
+	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c
+	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c
+	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cec.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_comp.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_crc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cryp_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cryp.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dcmi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dfsdm_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dfsdm.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma2d.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dsi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dts.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_eth.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_fdcan.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gfxmmu.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hash_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hash.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hcd.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hrtim.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2s.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_irda.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_iwdg.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_jpeg.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_lptim.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ltdc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdios.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mmc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_msp_template.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nand.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_nor.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_opamp_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_opamp.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ospi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_otfdec.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pssi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_qspi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_ramecc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rng_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rng.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rtc_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rtc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sai_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sai.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sd.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sdram.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_smartcard_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_smartcard.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_smbus.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spdifrx.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sram.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_swpmi.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_wwdg.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_fmc.c
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_sdmmc.c
+	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src/diskio.c
+	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c
+	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src/ff.c
+	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src/option/syscall.c
+	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src/option/unicode.c
+)
+
+add_executable(quakembd
+	display.c
+	interrupt_handlers.c
+	main.c
+	sd_diskio_template_bspv2.c
+	syscalls.c
+	sysmem.c
+	system_stm32h7xx.c
+	timer.c
+	gcc/startup_stm32h747xx.s
+	../../fio/fio_fatfs.c
+	${CUBE_DRIVER_SRCS}
+)
+
+# Hex binaries
+add_embedded_binary(quakembd)
+
+target_include_directories(quakembd PRIVATE
+	${PROJECT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_SOURCE_DIR}/inc
+	${CUBE_HOME}/Drivers/CMSIS/Core/Include
+	${CUBE_HOME}/Drivers/CMSIS/Device/ST/STM32H7xx/Include
+	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Inc
+	${CUBE_HOME}/Drivers/BSP/Components/Common
+	${CUBE_HOME}/Drivers/BSP/Components/is42s32900j
+	${CUBE_HOME}/Drivers/BSP/Components/otm8009a
+	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO
+	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src
+)
+
+target_link_libraries(quakembd
+	winquake
+	port
+	m
+)
+
+# Adding the linker script
+set_target_properties(quakembd
+	PROPERTIES LINK_FLAGS
+	-T${CMAKE_CURRENT_SOURCE_DIR}/gcc/stm32h747xx_flash_cm7.ld
+)
