@@ -19,8 +19,6 @@
 #include <quakembd.h>
 #include <otm8009a.h>
 
-#define DISPLAY_WIDTH 800
-#define DISPLAY_HEIGHT 480
 #define DISPLAY_FRAME_BUFFER LCD_LAYER_0_ADDRESS
 
 #define DISPLAY_VSYNC 1

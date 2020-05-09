@@ -23,8 +23,20 @@
 #include "sd_diskio.h"
 #include "timer.h"
 
+#define MAX_KEY_EVENTS 10
+
 static FATFS fatfs;
 static char sd_path[4];
+
+static key_event_t key_events[MAX_KEY_EVENTS];
+static size_t key_head = 0;
+static size_t key_tail = 0;
+
+#define key_enqueue(c, d) do { \
+	key_events[key_head].code = (c); \
+	key_events[key_head].down = (d); \
+	key_head = (key_head + 1) % MAX_KEY_EVENTS; \
+} while (0)
 
 static void CPU_CACHE_Enable(void)
 {
@@ -156,6 +168,37 @@ static void MPU_Config(void)
 	HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
+void BSP_PB_Callback(Button_TypeDef button)
+{
+	key_enqueue(200, HAL_GPIO_ReadPin(BUTTON_WAKEUP_GPIO_PORT, BUTTON_WAKEUP_PIN) == GPIO_PIN_SET);
+}
+
+void BSP_JOY_Callback(JOY_TypeDef joy, uint32_t joy_pin)
+{
+	uint8_t bind = 0;
+
+	switch (joy_pin) {
+	case JOY_SEL:
+		bind = 13;
+		break;
+	case JOY_DOWN:
+		bind = 129;
+		break;
+	case JOY_LEFT:
+		bind = 0x2c;
+		break;
+	case JOY_RIGHT:
+		bind = 0x2e;
+		break;
+	case JOY_UP:
+		bind = 128;
+		break;
+	}
+
+	if (bind != 0)
+		key_enqueue(bind, HAL_GPIO_ReadPin(JOY1_SEL_GPIO_PORT, joy_pin << 2) != GPIO_PIN_SET);
+}
+
 static void filesystem_init()
 {
 	FRESULT r;
@@ -182,6 +225,38 @@ void *qembd_allocmain(size_t size)
 	return (void *) (0xD0400000U);
 }
 
+int qembd_dequeue_key_event(key_event_t *e)
+{
+	if (key_head == key_tail)
+		return -1;
+
+	e->code = key_events[key_tail].code;
+	e->down = key_events[key_tail].down;
+	key_tail = (key_tail + 1) % MAX_KEY_EVENTS;
+
+	return 0;
+}
+
+int qembd_get_current_position(mouse_position_t *position)
+{
+	TS_State_t state = {0};
+	int32_t r;
+
+	r = BSP_TS_GetState(0, &state);
+	bail_if_error(r, BSP_ERROR_NONE, "BSP_TS_GetState");
+
+	if (!state.TouchDetected)
+		goto bail;
+
+	position->x = (int) state.TouchX;
+//	position->y = (int) state.TouchY;
+
+	return 0;
+
+bail:
+	return -1;
+}
+
 int main()
 {
 	COM_InitTypeDef com_cfg = {
@@ -190,6 +265,18 @@ int main()
 		.StopBits = COM_STOPBITS_1,
 		.Parity = COM_PARITY_NONE,
 		.HwFlowCtl = COM_HWCONTROL_NONE
+	};
+	GPIO_InitTypeDef pb_gpio_cfg = {
+		.Pin = BUTTON_WAKEUP_PIN,
+		.Mode = GPIO_MODE_IT_RISING_FALLING,
+		.Pull = GPIO_NOPULL,
+		.Speed = GPIO_SPEED_FREQ_HIGH
+	};
+	TS_Init_t ts_cfg = {
+		.Width = DISPLAY_WIDTH,
+		.Height = DISPLAY_HEIGHT,
+		.Orientation = TS_SWAP_XY | TS_SWAP_Y,
+		.Accuracy = 0
 	};
 	HAL_StatusTypeDef status;
 
@@ -210,6 +297,11 @@ int main()
 	BSP_LED_Init(LED2);
 	BSP_LED_Init(LED3);
 	BSP_LED_Init(LED4);
+	BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+	/* Tweak default PB behavior */
+	HAL_GPIO_Init(BUTTON_WAKEUP_GPIO_PORT, &pb_gpio_cfg);
+	BSP_JOY_Init(JOY1, JOY_MODE_EXTI, JOY_ALL);
+	BSP_TS_Init(0, &ts_cfg);
 	BSP_COM_Init(COM1, &com_cfg);
 	BSP_SDRAM_Init(0);
 

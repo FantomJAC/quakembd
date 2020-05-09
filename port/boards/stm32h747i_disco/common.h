@@ -25,11 +25,15 @@
 /* BSP */
 #include <stm32h747i_discovery.h>
 #include <stm32h747i_discovery_sdram.h>
+#include <stm32h747i_discovery_ts.h>
 /* Common clibs */
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
+
+#define DISPLAY_WIDTH 800
+#define DISPLAY_HEIGHT 480
 
 #define bail_if_error(X, COND, msg) { if ((X) != (COND)) { printf("[STM32_ERROR] " msg ": %d", X); goto bail; } }
 #define bail(msg) { printf("[STM32_ERROR] " msg); goto bail; }

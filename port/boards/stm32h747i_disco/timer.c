@@ -85,7 +85,8 @@ uint64_t qembd_get_us_time()
 
 void qembd_udelay(uint32_t us)
 {
-	// TODO
+	/* FIXME */
+	HAL_Delay(1);
 	return;
 }
 

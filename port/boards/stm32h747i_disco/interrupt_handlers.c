@@ -66,7 +66,38 @@ void SysTick_Handler(void)
 	HAL_IncTick();
 }
 
+void EXTI2_IRQHandler(void)
+{
+	BSP_JOY_IRQHandler(JOY1, JOY_SEL);
+}
+
+void EXTI3_IRQHandler(void)
+{
+	BSP_JOY_IRQHandler(JOY1, JOY_DOWN);
+}
+
+void EXTI4_IRQHandler(void)
+{
+	BSP_JOY_IRQHandler(JOY1, JOY_LEFT);
+}
+
+void EXTI9_5_IRQHandler(void)
+{
+	BSP_JOY_IRQHandler(JOY1, JOY_RIGHT);
+	BSP_JOY_IRQHandler(JOY1, JOY_UP);
+}
+
+void EXTI15_10_IRQHandler(void)
+{
+	BSP_PB_IRQHandler(BUTTON_WAKEUP);
+}
+
 void MDMA_IRQHandler(void)
 {
 	BSP_SDRAM_IRQHandler(0);
+}
+
+void SDMMC1_IRQHandler(void)
+{
+	BSP_SD_IRQHandler(0);
 }

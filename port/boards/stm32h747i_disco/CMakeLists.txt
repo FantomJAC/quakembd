@@ -4,6 +4,8 @@ set(CUBE_DRIVER_SRCS
 	${CUBE_HOME}/Drivers/BSP/Components/is42s32800j/is42s32800j.c
 	${CUBE_HOME}/Drivers/BSP/Components/otm8009a/otm8009a_reg.c
 	${CUBE_HOME}/Drivers/BSP/Components/otm8009a/otm8009a.c
+	${CUBE_HOME}/Drivers/BSP/Components/ft6x06/ft6x06.c
+	${CUBE_HOME}/Drivers/BSP/Components/ft6x06/ft6x06_reg.c
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c
@@ -127,7 +129,8 @@ target_include_directories(quakembd PRIVATE
 	${CUBE_HOME}/Drivers/CMSIS/Device/ST/STM32H7xx/Include
 	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Inc
 	${CUBE_HOME}/Drivers/BSP/Components/Common
-	${CUBE_HOME}/Drivers/BSP/Components/is42s32900j
+	${CUBE_HOME}/Drivers/BSP/Components/is42s32800j
+	${CUBE_HOME}/Drivers/BSP/Components/ft6x06
 	${CUBE_HOME}/Drivers/BSP/Components/otm8009a
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO
 	${CUBE_HOME}/Middlewares/Third_Party/FatFs/src

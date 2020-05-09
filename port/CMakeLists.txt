@@ -1,5 +1,5 @@
 add_library(port OBJECT
-	in_null.c
+	in_port.c
 	cd_null.c
 	snd_null.c
 	sys_port.c
