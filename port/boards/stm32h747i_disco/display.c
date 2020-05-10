@@ -154,6 +154,13 @@ static DMA2D_HandleTypeDef dma2d = {
 	}
 };
 
+static volatile int refresh_pending = 0;
+
+void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
+{
+	refresh_pending = 0;
+}
+
 void LCD_MspInit(void)
 {
 	/** @brief Enable the LTDC clock */
@@ -371,5 +378,8 @@ bail:
 
 void qembd_refresh()
 {
+	refresh_pending = 1;
 	HAL_DSI_Refresh(&dsi);
+	while (refresh_pending)
+		;
 }
