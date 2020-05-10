@@ -6,7 +6,7 @@ Based on original Quake GPL source: [https://github.com/id-Software/Quake](https
 
 ## Limitations
 
-* Sound, input, and music is not yet supported.
+* All sound functions are not yet supported.
 * Many other features may not be supported or left untested.
 
 ## Will it run Quake?
@@ -16,6 +16,7 @@ Currently the following devices are supported.
 * [STM32H747I-DISCO](https://www.st.com/ja/evaluation-tools/stm32h747i-disco.html)
   * Locate `*.PAK` files under `<micro-sd-card>/quakembd/id1`
   * You can use [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html) to program `quakembd.bin` file
+  * Touch screen & joystick are supported for the minimal playing experience
 
 ## How to build
 
