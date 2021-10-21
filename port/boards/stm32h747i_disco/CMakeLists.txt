@@ -1,4 +1,4 @@
-set(CUBE_HOME "$ENV{HOME}/STM32Cube/Repository/STM32Cube_FW_H7_V1.7.0")
+set(CUBE_HOME "$ENV{HOME}/STM32CubeH7")
 
 set(CUBE_DRIVER_SRCS
 	${CUBE_HOME}/Drivers/BSP/Components/is42s32800j/is42s32800j.c
@@ -8,6 +8,8 @@ set(CUBE_DRIVER_SRCS
 	${CUBE_HOME}/Drivers/BSP/Components/ft6x06/ft6x06_reg.c
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sd.c
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_sdram.c
+	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_ts.c
+	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery_bus.c
 	${CUBE_HOME}/Drivers/BSP/STM32H747I-DISCO/stm32h747i_discovery.c
 	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c
 	${CUBE_HOME}/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c

@@ -24,7 +24,7 @@ Use CMake with [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-
 
 The defaut toolchain file assumes:
 * GNU Arm Embedded Toolchain is installed under `~/gcc-arm-none-eabi-9-2019-q4-major`
-* STM32Cube package is installed under `~/STM32Cube/Repository/STM32Cube_FW_H7_V1.7.0`
+* [STM32Cube package](https://github.com/STMicroelectronics/STM32CubeH7) is cloned under `~/STM32CubeH7`
 
 See `port/boards/stm32h747i_disco/gcc/toolchain.cmake` file for details.
 
