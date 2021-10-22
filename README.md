@@ -2,6 +2,8 @@
 
 QuakEMBD is yet another WinQuake port for embedded devices, primarily for ARM Cortex-M devices.
 
+![QuakEMBD on Action](https://i.imgur.com/wctRYIJ.gif)
+
 Based on original Quake GPL source: [https://github.com/id-Software/Quake](https://github.com/id-Software/Quake)
 
 ## Limitations
