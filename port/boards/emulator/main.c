@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <quakembd.h>
 #include <sys/time.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -48,4 +49,16 @@ int main(int c, char **v)
 void *qembd_allocmain(size_t size)
 {
 	return malloc(size);
+}
+
+int qembd_dequeue_key_event(key_event_t *e)
+{
+	/* Not Implemented */
+	return -1;
+}
+
+int qembd_get_current_position(mouse_position_t *position)
+{
+	/* Not Implemented */
+	return -1;
 }

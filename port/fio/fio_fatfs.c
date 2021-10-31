@@ -32,7 +32,7 @@ static int nextFreeFile()
 	int handle = 0;
 	uint32_t mask = 0x1;
 
-	while (true) {
+	while (1) {
 		if ((mask & file_flags) == 0) {
 			file_flags |= mask;
 			break;
