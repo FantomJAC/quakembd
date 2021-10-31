@@ -15,7 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <quakedef.h>
+#include <quakembd.h>
+#include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -33,7 +35,7 @@ int Sys_FileOpenRead(char *path, int *handle)
 		return -1;
 
 	if (fstat(h, &fileinfo) == -1)
-		Sys_Error ("Error fstating %s", path);
+		qembd_error("Error fstating %s", path);
 
 	return fileinfo.st_size;
 }
@@ -47,7 +49,7 @@ int Sys_FileOpenWrite(char *path)
 	handle = open(path, O_RDWR | O_CREAT | O_TRUNC, 0666);
 
 	if (handle == -1)
-		Sys_Error("Error opening %s: %s", path, strerror(errno));
+		qembd_error("Error opening %s: %s", path, strerror(errno));
 
 	return handle;
 }

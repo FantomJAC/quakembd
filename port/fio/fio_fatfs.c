@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <quakedef.h>
+#include <quakembd.h>
 #include <ff.h>
 
 #define MAX_FILES 32
@@ -24,8 +24,6 @@ static uint32_t file_flags = 0;
 #define INVALID_HANDLE -1
 #define HANDLE_TO_FILE(h) (((0x01 << h) & file_flags) ? &(file_rsrc[(h)]) : NULL)
 #define FREE_HANDLE(h) (file_flags &= ~(0x01 << h))
-
-#define Sys_Warning(msg, ...) Sys_DebugLog(NULL, "[WARN]: " msg "\r\n", ##__VA_ARGS__)
 
 static int nextFreeFile()
 {
@@ -55,20 +53,20 @@ int Sys_FileOpenRead(char *path, int *handle)
 
 	r = f_stat(path, &info);
 	if (r != FR_OK) {
-		Sys_Warning("Cannot f_stat %s", path);
+		qembd_warn("Cannot f_stat %s", path);
 		goto bail;
 	}
 
 	h = nextFreeFile();
 	if (h < 0) {
-		Sys_Warning("Max file limit reached, cannot open %s", path);
+		qembd_warn("Max file limit reached, cannot open %s", path);
 		goto bail;
 	}
 
 	fp = HANDLE_TO_FILE(h);
 	r = f_open(fp, path, FA_READ);
 	if (r != FR_OK) {
-		Sys_Warning("FatFs error %d (FA_READ), cannot open %s", r, path);
+		qembd_warn("FatFs error %d (FA_READ), cannot open %s", r, path);
 		goto bail;
 	}
 
@@ -91,14 +89,14 @@ int Sys_FileOpenWrite(char *path)
 
 	h = nextFreeFile();
 	if (h < 0) {
-		Sys_Warning("Max file limit reached, cannot open %s", path);
+		qembd_warn("Max file limit reached, cannot open %s", path);
 		goto bail;
 	}
 
 	fp = HANDLE_TO_FILE(h);
 	r = f_open(fp, path, FA_READ | FA_WRITE | FA_CREATE_ALWAYS);
 	if (r != FR_OK) {
-		Sys_Warning("FatFs error %d (FA_WRITE), cannot open %s", r, path);
+		qembd_warn("FatFs error %d (FA_WRITE), cannot open %s", r, path);
 		goto bail;
 	}
 
@@ -165,7 +163,7 @@ int	Sys_FileTime(char *path)
 
 	r = f_stat(path, &info);
 	if (r != FR_OK) {
-		Sys_Warning("Cannot f_stat %s", path);
+		qembd_warn("Cannot f_stat %s", path);
 		goto bail;
 	}
 
@@ -181,7 +179,7 @@ void Sys_mkdir(char *path)
 
 	r = f_mkdir(path);
 	if (r != FR_OK)
-		Sys_Error("Cannot f_mkdir %s", path);
+		qembd_error("Cannot f_mkdir %s", path);
 }
 
 void Sys_FileSync(int handle)
@@ -194,7 +192,7 @@ void Sys_FileSync(int handle)
 
 	r = f_sync(fp);
 	if (r != FR_OK)
-		Sys_Error("Cannot f_sync");
+		qembd_error("Cannot f_sync");
 }
 
 void Sys_File_gets(int handle, char *buf, int len)

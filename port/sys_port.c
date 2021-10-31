@@ -19,13 +19,10 @@
 #include <quakembd.h>
 
 #define DEFAULT_MEM_SIZE (8 * 1024 * 1024)
+#define DEFAULT_BASEDIR "quakembd"
+#define DEFAULT_CACHEDIR "/tmp"
 
 qboolean isDedicated;
-
-int nostdout = 0;
-
-char *basedir = "quakembd";
-char *cachedir = "/tmp";
 
 cvar_t  sys_linerefresh = {"sys_linerefresh","0"};// set for entity display
 
@@ -33,57 +30,34 @@ cvar_t  sys_linerefresh = {"sys_linerefresh","0"};// set for entity display
 // Logging
 // =======================================================================
 
-void Sys_DebugLog(char *file, char *fmt, ...)
-{
-	va_list argptr; 
-	char s[1024];
+#ifdef WINQUAKE_LOGGING_EXTERNAL
+#include <stdio.h>
+#define DEFAULT_LOG_BUFFER_SIZE 1024
 
-	va_start(argptr, fmt);
-	vsprintf(s, fmt, argptr);
-	va_end(argptr);
-
-	printf("[DEBUG] %s\n", s);
-}
-
-void Sys_Error(char *fmt, ...)
-{ 
-	va_list argptr; 
-	char s[1024];
-
-	va_start(argptr, fmt);
-	vsprintf(s, fmt, argptr);
-	va_end(argptr);
-
-	printf("[ERROR] %s\n", s);
-
-	Host_Shutdown();
-	exit(1);
-} 
-
-void Sys_Printf(char *fmt, ...)
+void _Sys_Printf(const char *fmt, ...)
 {
 	va_list argptr;
-	char text[1024];
+	char text[DEFAULT_LOG_BUFFER_SIZE];
 	unsigned char *p;
 
 	va_start(argptr, fmt);
 	vsprintf(text, fmt, argptr);
 	va_end(argptr);
 
-	if (strlen(text) > sizeof(text))
-		Sys_Error("memory overwrite in Sys_Printf");
-
-	if (nostdout)
+	if (strlen(text) > DEFAULT_LOG_BUFFER_SIZE) {
+		qembd_error("memory overwrite in Sys_Printf");
 		return;
+	}
 
 	for (p = (unsigned char *) text; *p; p++) {
 		*p &= 0x7f;
 		if ((*p > 128 || *p < 32) && *p != 10 && *p != 13 && *p != 9)
-			printf("[%02x]", *p);
+			fprintf(stdout, "[%02x]", *p);
 		else
 			putc(*p, stdout);
 	}
 }
+#endif
 
 // =======================================================================
 // General routines
@@ -146,20 +120,22 @@ int qembd_main(int c, char **v)
 	if (j)
 		parms.memsize = (int) (Q_atof(com_argv[j+1]) * 1024 * 1024);
 	parms.membase = qembd_allocmain(parms.memsize);
-	if (!parms.membase)
-		Sys_Error("Memory cannot be allocated");
+	if (!parms.membase) {
+		qembd_error("Memory cannot be allocated");
+		return -1;
+	}
 
-	parms.basedir = basedir;
+	parms.basedir = DEFAULT_BASEDIR;
 // caching is disabled by default, use -cachedir to enable
-//	parms.cachedir = cachedir;
+//	parms.cachedir = DEFAULT_CACHEDIR;
 
 	Host_Init(&parms);
 
-	if (COM_CheckParm("-nostdout")) {
-		nostdout = 1;
-	} else {
-		printf("QuakEMBD - Based on WinQuake %0.3f\n", VERSION);
-	}
+//	if (COM_CheckParm("-nostdout")) {
+//		nostdout = 1;
+//	}
+
+	qembd_info("QuakEMBD - Based on WinQuake %0.3f", VERSION);
 
 	oldtime = Sys_FloatTime() - 0.1;
 	while (1) {

@@ -54,11 +54,11 @@ void VID_Init(unsigned char *palette)
 
 	vid_buffer = (byte *) Hunk_HighAllocName(width * height * sizeof (byte), "vid_main");
 	if (!vid_buffer)
-		Sys_Error("Not enough memory for video mode (vid_main)\n");
+		qembd_error("Not enough memory for video mode (vid_main)");
 
 	d_pzbuffer = (short *) Hunk_HighAllocName(width * height * sizeof (short), "zbuffer");
 	if (!d_pzbuffer)
-		Sys_Error("Not enough memory for video mode (zbuffer)\n");
+		qembd_error("Not enough memory for video mode (zbuffer)");
 
 	vid.width = vid.conwidth = width;
 	vid.height = vid.conheight = height;
@@ -74,7 +74,7 @@ void VID_Init(unsigned char *palette)
 	vid_surfcachesize = D_SurfaceCacheForRes(vid.width, vid.height);
 	surfcache = (byte *) Hunk_HighAllocName(vid_surfcachesize, "surfcache");
 	if (!surfcache)
-		Sys_Error("Not enough memory for video mode\n");
+		qembd_error("Not enough memory for video mode");
 
 	D_InitCaches(surfcache, vid_surfcachesize);
 

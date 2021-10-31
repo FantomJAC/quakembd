@@ -35,8 +35,7 @@
 #define DISPLAY_WIDTH 800
 #define DISPLAY_HEIGHT 480
 
-#define bail_if_error(X, COND, msg) { if ((X) != (COND)) { printf("[STM32_ERROR] " msg ": %d", X); goto bail; } }
-#define bail(msg) { printf("[STM32_ERROR] " msg); goto bail; }
+#define QEMBD_LOGGING_TAG "STM32H747I"
 
 void error_loop();
 

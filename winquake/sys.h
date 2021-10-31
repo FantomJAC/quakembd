@@ -46,13 +46,25 @@ void Sys_MakeCodeWriteable (unsigned long startaddr, unsigned long length);
 //
 // system IO
 //
-void Sys_DebugLog(char *file, char *fmt, ...);
 
-void Sys_Error (char *error, ...);
-// an error will cause the entire program to exit
+#ifdef WINQUAKE_ENABLE_LOGGING
+#ifdef WINQUAKE_LOGGING_EXTERNAL
+void _Sys_Printf(const char *fmt, ...);
+#else
+#include <stdio.h>
+#define _Sys_Printf(fmt, ...) printf(fmt, ##__VA_ARGS__)
+#endif
+#else
+#define _Sys_Printf(fmt, ...)
+#endif
 
-void Sys_Printf (char *fmt, ...);
-// send text to the console
+#define Sys_Printf(msg, ...) _Sys_Printf(msg, ##__VA_ARGS__)
+#define Sys_Error(msg, ...) \
+do { \
+	_Sys_Printf(msg, ##__VA_ARGS__); \
+	Host_Shutdown(); \
+	exit(1); \
+} while(0)
 
 void Sys_Quit (void);
 

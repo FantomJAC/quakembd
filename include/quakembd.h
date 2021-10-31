@@ -21,6 +21,37 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+/* Use stdio printf by default */
+#ifndef QEMBD_PRINTF
+#include <stdio.h>
+#define QEMBD_PRINTF printf
+#endif
+
+#ifndef QEMBD_LOGGING_TAG
+#define QEMBD_LOGGING_TAG "QUAKEMBD"
+#endif
+
+#define FMT(X) "\033[" X "m"
+
+#ifdef QEMBD_ENABLE_DEBUG
+	#define qembd_debug(msg, ...) QEMBD_PRINTF(FMT("36") QEMBD_LOGGING_TAG " [DEBUG]: " msg FMT("0") "\r\n", ##__VA_ARGS__)
+	#ifdef QEMBD_ENABLE_TRACE
+		#define qembd_trace(msg, ...) QEMBD_PRINTF(QEMBD_LOGGING_TAG " [TRACE]: " msg "\r\n", ##__VA_ARGS__)
+	#else
+		#define qembd_trace(msg, ...)
+	#endif
+#else
+	#define qembd_debug(msg, ...)
+	#define qembd_trace(msg, ...)
+#endif
+#define qembd_info(msg, ...) QEMBD_PRINTF(FMT("32") QEMBD_LOGGING_TAG " [INFO]: " msg FMT("0") "\r\n", ##__VA_ARGS__)
+#define qembd_warn(msg, ...) QEMBD_PRINTF(FMT("33") QEMBD_LOGGING_TAG " [WARN]: " msg FMT("0") "\r\n", ##__VA_ARGS__)
+#define qembd_error(msg, ...) QEMBD_PRINTF(FMT("31") QEMBD_LOGGING_TAG " [ERROR]: " msg FMT("0") "\r\n", ##__VA_ARGS__)
+
+#define bail_if_error(X, COND, msg) { if ((X) != (COND)) { qembd_error(msg ": %d", X); goto bail; } }
+#define bail_if_null(X, msg) { if ((X) == NULL) { qembd_error(msg); goto bail; } }
+#define bail(msg) { qembd_error(msg); goto bail; }
+
 typedef struct {
 	uint8_t code;
 	uint8_t down;

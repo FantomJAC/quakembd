@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <quakedef.h>
 #include <quakembd.h>
 #include <MiniFB.h>
 
@@ -39,7 +38,7 @@ void qembd_vidinit()
 {
 	window = mfb_open_ex("Quake", DISPLAY_WIDTH, DISPLAY_HEIGHT, WF_BORDERLESS);
 	if (!window)
-		Sys_Error("Can't create Window");
+		qembd_error("Can't create Window");
 }
 
 void qembd_fillrect(uint8_t *src, uint32_t *clut, uint16_t x, uint16_t y, uint16_t xsize, uint16_t ysize)
