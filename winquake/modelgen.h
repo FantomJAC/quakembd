@@ -49,12 +49,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // must match definition in spritegn.h
 #ifndef SYNCTYPE_T
 #define SYNCTYPE_T
-typedef enum {ST_SYNC=0, ST_RAND } synctype_t;
+#define ST_SYNC 0
+#define ST_RAND 1
+typedef uint32_t synctype_t;
 #endif
 
-typedef enum { ALIAS_SINGLE=0, ALIAS_GROUP } aliasframetype_t;
+#define ALIAS_SINGLE 0
+#define ALIAS_GROUP 1
+typedef uint32_t aliasframetype_t;
 
-typedef enum { ALIAS_SKIN_SINGLE=0, ALIAS_SKIN_GROUP } aliasskintype_t;
+#define ALIAS_SKIN_SINGLE 0
+#define ALIAS_SKIN_GROUP 1
+typedef uint32_t aliasskintype_t;
 
 typedef struct {
 	int			ident;

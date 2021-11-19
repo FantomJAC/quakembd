@@ -63,7 +63,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // must match definition in modelgen.h
 #ifndef SYNCTYPE_T
 #define SYNCTYPE_T
-typedef enum {ST_SYNC=0, ST_RAND } synctype_t;
+#define ST_SYNC 0
+#define ST_RAND 1
+typedef uint32_t synctype_t;
 #endif
 
 // TODO: shorten these?
@@ -99,7 +101,9 @@ typedef struct {
 	float	interval;
 } dspriteinterval_t;
 
-typedef enum { SPR_SINGLE=0, SPR_GROUP } spriteframetype_t;
+#define SPR_SINGLE 0
+#define SPR_GROUP 1
+typedef uint32_t spriteframetype_t;
 
 typedef struct {
 	spriteframetype_t	type;
